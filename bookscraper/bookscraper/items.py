@@ -1,7 +1,18 @@
-from scrapy.item import Item, Field
+import scrapy
 
-class BookItem(Item):
-    title = Field()
-    category = Field()
-    description = Field()
-    price = Field()
+# def serializer_price(value):
+#     return f'${str(value)}'
+
+class BookItem(scrapy.Item):
+    url = scrapy.Field()
+    title = scrapy.Field()
+    product_type = scrapy.Field()
+    price_excl_tax = scrapy.Field()
+    price_incl_tax = scrapy.Field()
+    tax = scrapy.Field()
+    availability = scrapy.Field()
+    num_reviews = scrapy.Field()
+    stars = scrapy.Field()
+    category = scrapy.Field()
+    description = scrapy.Field()
+    price = scrapy.Field()
