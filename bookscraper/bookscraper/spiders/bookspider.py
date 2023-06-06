@@ -1,17 +1,20 @@
 import scrapy
 from urllib.parse import urljoin
 from bookscraper.items import BookItem
-
+import random
 
 class BookspiderSpider(scrapy.Spider):
     name = "bookspider"
     allowed_domains = ["books.toscrape.com"]
     start_urls = ["https://books.toscrape.com/"]
+    
     custom_settings = {
         'FEEDS': {
             'bookdata1.json': {'format': 'json', 'overwrite': True}
         }
     }
+    
+    
     def parse(self, response):
         books = response.css("article.product_pod")
         for book in books:
@@ -19,7 +22,7 @@ class BookspiderSpider(scrapy.Spider):
 
             if "catalogue/" in relative_url:
                 book_url = urljoin(self.start_urls[0], relative_url)
-            else:
+            else: 
                 book_url = urljoin(self.start_urls[0] + "catalogue/", relative_url)
             yield response.follow(book_url, callback=self.parse_book_page)
 

@@ -17,13 +17,16 @@ FEEDS = {
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "bookscraper (+http://www.yourdomain.com)"
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
+
+
+
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -53,9 +56,30 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    "bookscraper.middlewares.BookscraperDownloaderMiddleware": 543,
-# }
+SCRAPEOPS_API_KEY = '3b802b5e-5407-4126-b0f2-45eaa0da6b77'
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_BROWSER_HEADER_ENDPOINT  =  'https://headers.scrapeops.io/v1/browser-headers'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED =  True
+SCRAPEOPS_NUM_RESULTS = 50
+
+
+
+# ROTATING_PROXY_LIST_PATH = '/my/path/proxies.txt'
+ 
+
+# PROXY_USER='sptaax6h3q'
+# PROXY_PASSWORD='pOG26qJl7sAehza7ud'
+# PROXY_ENDPOINT='gate.smartproxy.com'
+# PROXY_PORT='7000'
+
+DOWNLOADER_MIDDLEWARES = {
+   "bookscraper.middlewares.ScrapeOpsFakeAgentMiddleware": 543,
+   "bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 443,
+   "bookscraper.middlewares.MyProxyMiddleware": 350,
+
+   # 'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+   # 'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -67,7 +91,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "bookscraper.pipelines.BookscraperPipeline": 300,
-   "bookscraper.pipelines.SaveToMySQLPipeline": 400,
+   # "bookscraper.pipelines.SaveToMySQLPipeline": 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
