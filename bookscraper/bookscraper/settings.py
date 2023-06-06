@@ -57,13 +57,14 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 SCRAPEOPS_API_KEY = '3b802b5e-5407-4126-b0f2-45eaa0da6b77'
+SCRAPEOPS_PROXY_ENABLED = True
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
 SCRAPEOPS_FAKE_BROWSER_HEADER_ENDPOINT  =  'https://headers.scrapeops.io/v1/browser-headers'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED =  True
 SCRAPEOPS_NUM_RESULTS = 50
 
 # it needs for pip install... too
-SCRAPEOPS_API_KEY = '3b802b5e-5407-4126-b0f2-45eaa0da6b77'
+
 SCRAPEOPS_PROXY_ENABLED = True
 # SCRAPEOPS_PROXY_SETTINGS = {'country': 'us'}
 
@@ -80,11 +81,11 @@ DOWNLOADER_MIDDLEWARES = {
    "bookscraper.middlewares.ScrapeOpsFakeAgentMiddleware": 543,
    "bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 443,
    
-   # "bookscraper.middlewares.MyProxyMiddleware": 350,
-   # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
+   "bookscraper.middlewares.MyProxyMiddleware": 350,
+   'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
    
    # 'bookscraper.middlewares.ScrapeOpsProxyMiddleware': 725,
-   'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725, #pip install ...
+   # 'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725, #pip install ...
 
    # 'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
    # 'rotating_proxies.middlewares.BanDetectionMiddleware': 620,

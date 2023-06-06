@@ -4,17 +4,17 @@ from bookscraper.items import BookItem
 import random
 from urllib.parse import urlencode
 
-# API_KEY = '3b802b5e-5407-4126-b0f2-45eaa0da6b77'
+API_KEY = '3b802b5e-5407-4126-b0f2-45eaa0da6b77'
 
-# def get_proxy_url(url):
-#     '''Сайт https://scrapeops.io'''
-#     payload = {'api_key': API_KEY, 'url': url}
-#     proxy_url = 'https://proxy.scrapeops.io/v1/?' + urlencode(payload)
-#     return proxy_url
+def get_proxy_url(url):
+    '''Сайт https://scrapeops.io'''
+    payload = {'api_key': API_KEY, 'url': url}
+    proxy_url = 'https://proxy.scrapeops.io/v1/?' + urlencode(payload)
+    return proxy_url
 
 class BookspiderSpider(scrapy.Spider):
     name = "bookspider"
-    allowed_domains = ["books.toscrape.com", 'scrapeops.io']
+    allowed_domains = ["books.toscrape.com", 'proxy.scrapeops.io']
     start_urls = ["https://books.toscrape.com/"]
     
     custom_settings = {
@@ -23,8 +23,8 @@ class BookspiderSpider(scrapy.Spider):
         }
     }
     
-    # def start_requests(self):
-    #     return scrapy.Request(url=self.start_urls[0], callback=self.parse)
+    def start_requests(self):
+        yield scrapy.Request(url=get_proxy_url(self.start_urls[0]), callback=self.parse)
     
     def parse(self, response):
         books = response.css("article.product_pod")
@@ -35,7 +35,7 @@ class BookspiderSpider(scrapy.Spider):
                 book_url = urljoin(self.start_urls[0], relative_url)
             else: 
                 book_url = urljoin(self.start_urls[0] + "catalogue/", relative_url)
-            # yield scrapy.Request(url= book_url, callback=self.parse_book_page)
+            # yield scrapy.Request(url=book_url, callback=self.parse_book_page)
             yield response.follow(book_url, callback=self.parse_book_page)
 
         next_page = response.css("li.next a ::attr(href)").get()
