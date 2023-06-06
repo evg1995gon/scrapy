@@ -80,11 +80,11 @@ DOWNLOADER_MIDDLEWARES = {
    "bookscraper.middlewares.ScrapeOpsFakeAgentMiddleware": 543,
    "bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 443,
    
-   "bookscraper.middlewares.MyProxyMiddleware": 350,
-   'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
+   # "bookscraper.middlewares.MyProxyMiddleware": 350,
+   # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
    
    # 'bookscraper.middlewares.ScrapeOpsProxyMiddleware': 725,
-   # 'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725, #pip install ...
+   'scrapeops_scrapy_proxy_sdk.scrapeops_scrapy_proxy_sdk.ScrapeOpsScrapyProxySdk': 725, #pip install ...
 
    # 'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
    # 'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
